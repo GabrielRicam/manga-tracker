@@ -1,9 +1,14 @@
-function App() {
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import Home from './pages/Home';
+import Nav from './pages/Navbar';
+export default function App() {
   return (
-    <>
-    <div className='text-9xl'>Helol</div>
-    </>
+    <BrowserRouter>
+      <h1 className='font-title'>Halo udnia</h1>
+      <Nav/>
+      <Routes>
+        <Route path="/" element={<Home/>} />
+      </Routes>
+    </BrowserRouter>
   )
 }
-
-export default App

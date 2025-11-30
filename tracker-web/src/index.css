@@ -1,1 +1,10 @@
 @import "tailwindcss";
+
+@layer base {
+  @import url('https://fonts.googleapis.com/css2?family=Cal+Sans&family=Fira+Code:wght@300..700&display=swap');
+}
+
+@theme {
+  --font-title: "Cal Sans", sans-serif;
+  --font-monospace: "Fira Code", monospace;
+}
