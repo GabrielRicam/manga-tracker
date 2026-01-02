@@ -7,7 +7,7 @@ Nothing more, that's it.
 -   Update notifications via discord bot
 
 ## **Future implementations:**
-- [ ] Website GUI using React (on progrss)
+- [ ] Website GUI using React (on progrss, separated. Tried using electron instead. or maybe qt if i have time)
 - [ ] Replace Playwright with request-based scraping for optimization (too lazy :)
 - [ ] Interactive Discord bot features
 - [ ] Ability to add new manga without modifying the code
