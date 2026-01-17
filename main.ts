@@ -43,7 +43,7 @@ if (isNaN(interval)) {
   );
   interval = 30;
 }
-console.log(dataStored["Drawing"]);
+// console.log(dataStored["Drawing"]);
 
 for (let key in baseData) {
   if (baseData.hasOwnProperty(key)) {
@@ -52,22 +52,43 @@ for (let key in baseData) {
 }
 // const res = axios.get(baseData["Drawing"]).then((x) => Scraper.chapter(x.data).then((x) => console.log(x)));
 
-setInterval(async () => {
-  for (let key in baseData) {
-    if (baseData.hasOwnProperty(key)) {
-      const id = key.toLowerCase().replace(/\s+/g, "");
-      const res = await axios.get(baseData[key]);
-      const dataScrape = Scraper.metadataRK(res.data);
-      const chapterScrape = await Scraper.chapter(res.data);
+// setInterval(async () => {
+//   for (let key in baseData) {
+//     if (baseData.hasOwnProperty(key)) {
+//       const id = key.toLowerCase().replace(/\s+/g, "");
+//       const res = await axios.get(baseData[key]);
+//       const dataScrape = Scraper.metadataRK(res.data);
+//       const chapterScrape = await Scraper.chapter(res.data);
 
-      const oldChapter: number[] = chapterStored[id]["chapter"];
-      const newChapter = chapterScrape.filter((x) => !oldChapter.includes(x));
-      dataStored[id] = dataScrape;
-      chapterStored[id] = {
-        chapter: oldChapter.push(...newChapter),
-        newChapter: newChapter,
-        lastUpdate: new Date().toISOString(),
-      };
-    }
-  }
-}, 30 * interval);
+//       const oldChapter: number[] = chapterStored[id]["chapter"];
+//       const newChapter = chapterScrape.filter((x) => !oldChapter.includes(x));
+//       dataStored[id] = dataScrape;
+//       chapterStored[id] = {
+//         chapter: oldChapter.push(...newChapter),
+//         newChapter: newChapter,
+//         lastUpdate: new Date().toISOString(),
+//       };
+//     }
+//   }
+// }, 30 * interval);
+
+// For debugging
+(async () => {
+  let key = "Drawing";
+  const id = key.toLowerCase().replace(/\s+/g, "");
+  const res = await axios.get(baseData[key]);
+  const dataScrape = Scraper.metadataRK(res.data);
+  const chapterScrape = await Scraper.chapter(res.data);
+
+  const oldChapter: number[] = chapterStored[id]?.chapter ?? [];
+  const newChapter = chapterScrape.filter((x) => !oldChapter.includes(x));
+
+  chapterStored[id] = {
+    chapter: [...oldChapter, ...newChapter],
+    newChapter: newChapter,
+    lastUpdate: new Date().toISOString(),
+  };
+  dataStored[id] = dataScrape;
+  console.log(dataStored[id]);
+  console.log(chapterStored[id]);
+})();
