@@ -34,6 +34,7 @@ export async function chapter(html: string): Promise<number[]> {
     throw error;
   }
 }
+
 // ---------- METADATA SCRAPER------------
 export async function metadataMAL(id: number): Promise<metadata> {
   // Scrapes from MAL, requires manga ID.
